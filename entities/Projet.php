@@ -1,12 +1,13 @@
 <?php
-public class Projet {
+
+class Projet {
     private ?int $id;
     private string $nom;
     private string $description;
-    private $date_debut;
-    private $date_fin;
-    private $statut;
-    private $chef_projet_id;
+    private ?string $date_debut;
+    private ?string $date_fin;
+    private string $statut;
+    private ?int $chef_projet_id;
 
     public function __construct(array $data = []) {
         $this->id = $data['id'] ?? null;
@@ -17,43 +18,56 @@ public class Projet {
         $this->statut = $data['statut'] ?? 'ACTIF';
         $this->chef_projet_id = $data['chef_projet_id'] ?? null;
     }
-    public function getId() {
+
+    public function getId(): ?int {
         return $this->id;
     }
-    public  function getNom() {
+
+    public function getNom(): string {
         return $this->nom;
     }
-    public function getDescription() {
+
+    public function getDescription(): string {
         return $this->description;
     }
-    public function getDateDebut() {
+
+    public function getDateDebut(): ?string {
         return $this->date_debut;
     }
-    public function getDateFin() {
+
+    public function getDateFin(): ?string {
         return $this->date_fin;
     }
-    public function getStatut() {
+
+    public function getStatut(): string {
         return $this->statut;
     }
-    public function getChefProjetId() {
+
+    public function getChefProjetId(): ?int {
         return $this->chef_projet_id;
     }
-    public function setNom($nom) {
+
+    public function setNom(string $nom): void {
         $this->nom = $nom;
     }
-    public function setDescription($description) {
+
+    public function setDescription(string $description): void {
         $this->description = $description;
     }
-    public function setDateDebut($date_debut) {
+
+    public function setDateDebut(?string $date_debut): void {
         $this->date_debut = $date_debut;
     }
-    public function setDateFin($date_fin) {
+
+    public function setDateFin(?string $date_fin): void {
         $this->date_fin = $date_fin;
     }
-    public function setStatut($statut) {
+
+    public function setStatut(string $statut): void {
         $this->statut = $statut;
     }
-    public function setChefProjetId($chef_projet_id) {
+
+    public function setChefProjetId(?int $chef_projet_id): void {
         $this->chef_projet_id = $chef_projet_id;
     }
 }

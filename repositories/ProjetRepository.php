@@ -26,36 +26,34 @@ class ProjetRepository {
         }
         return true;
     }
-    public function findAll():array{
-        $projets=[];
+    public function findAll(): array {
+        $projets = [];
         try {
             $sql = "SELECT * FROM projets";
             $stmt = $this->db->query($sql);
         
             while ($projet = $stmt->fetch()) {
-                $projets[] = $projet;
+                $projets[] = new Projet($projet);
             }
            
-        
         } catch (PDOException $e) {
             throw new Exception("Error :findAll : projets  : " . $e->getMessage());
         }
         return $projets;
     }
-    public function findById($id) {
+    public function findById($id): ?Projet {
         try {
             $sql = "SELECT * FROM projets WHERE id = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$id]);
-            $projet= $stmt->fetch();
+            $projet = $stmt->fetch();
             if(!$projet){
                 return null;
             }
-            return $projet;
+            return new Projet($projet);
         
         } catch (PDOException $e) {
             return null;
-           
         }
     }
     public function delete(Projet $projet){
@@ -84,28 +82,28 @@ class ProjetRepository {
             return false;
         }
     }
-    public function findAllByChefProjetId($chef_projet_id):array{
-        $projets=[];
+    public function findAllByChefProjetId($chef_projet_id): array {
+        $projets = [];
         try {
             $sql = "SELECT * FROM projets WHERE chef_projet_id = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$chef_projet_id]);
             while ($projet = $stmt->fetch()) {
-                $projets[] = $projet;
+                $projets[] = new Projet($projet);
             }
         } catch (PDOException $e) {
             throw new Exception("Error :findAllByChefProjetId : projets  : " . $e->getMessage());
         }
         return $projets;
     }
-    public function findAllByStatut($statut):array{
-        $projets=[];
+    public function findAllByStatut($statut): array {
+        $projets = [];
         try {
             $sql = "SELECT * FROM projets WHERE statut = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$statut]);
             while ($projet = $stmt->fetch()) {
-                $projets[] = $projet;
+                $projets[] = new Projet($projet);
             }
         } catch (PDOException $e) {
             throw new Exception("Error :findAllByStatut : projets  : " . $e->getMessage());
