@@ -1,13 +1,15 @@
 <?php
 
+
 class Projet {
     private ?int $id;
     private string $nom;
     private string $description;
     private ?string $date_debut;
     private ?string $date_fin;
-    private string $statut;
-    private ?int $chef_projet_id;
+    private bool $actif;
+    private ?int $chef_id;
+
 
     public function __construct(array $data = []) {
         $this->id = $data['id'] ?? null;
@@ -15,10 +17,11 @@ class Projet {
         $this->description = $data['description'] ?? '';
         $this->date_debut = $data['date_debut'] ?? null;
         $this->date_fin = $data['date_fin'] ?? null;
-        $this->statut = $data['statut'] ?? 'ACTIF';
-        $this->chef_projet_id = $data['chef_projet_id'] ?? null;
+        $this->actif = $data['actif'] ?? true;
+        $this->chef_id = $data['chef_id'] ?? null;
     }
 
+    // Getters
     public function getId(): ?int {
         return $this->id;
     }
@@ -39,14 +42,15 @@ class Projet {
         return $this->date_fin;
     }
 
-    public function getStatut(): string {
-        return $this->statut;
+    public function isActif(): bool {
+        return $this->actif;
     }
 
-    public function getChefProjetId(): ?int {
-        return $this->chef_projet_id;
+    public function getChefId(): ?int {
+        return $this->chef_id;
     }
 
+    // Setters
     public function setNom(string $nom): void {
         $this->nom = $nom;
     }
@@ -63,12 +67,12 @@ class Projet {
         $this->date_fin = $date_fin;
     }
 
-    public function setStatut(string $statut): void {
-        $this->statut = $statut;
+    public function setActif(bool $actif): void {
+        $this->actif = $actif;
     }
 
-    public function setChefProjetId(?int $chef_projet_id): void {
-        $this->chef_projet_id = $chef_projet_id;
+    public function setChefId(?int $chef_id): void {
+        $this->chef_id = $chef_id;
     }
 }
   
